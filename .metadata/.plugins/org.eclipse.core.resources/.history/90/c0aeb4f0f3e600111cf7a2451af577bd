@@ -1,0 +1,75 @@
+package com.example.test;
+
+import java.io.IOException;
+import java.net.URL;
+
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Context;
+import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
+public class MainActivity extends Activity 
+{
+
+	static final String DEBUG_TAG = "HttpExample";
+	private EditText urlText;
+	private TextView textView;
+	
+    @Override
+    public void onCreate(Bundle savedInstanceState) 
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        urlText = (EditText)findViewById(R.id.myUrl);
+        textView = (TextView)findViewById(R.id.myText); 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) 
+    {
+        getMenuInflater().inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+    public void clickHandler(View view)
+    {
+    	String url = urlText.getText().toString();
+    	ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+    	NetworkInfo netInfo = connMgr.getNetworkInfo(ConnectivityManager.DEFAULT_NETWORK_PREFERENCE);
+    	
+    	if(netInfo == null || netInfo.isConnected())
+    	{
+    		new DownloadWebPageText().execute(url);
+    	}
+    	else
+    	{
+    		textView.setText("No network connection available");
+    	}
+    }
+    
+    private class DownloadWebPageText extends AsyncTask
+    {
+
+		@Override
+		protected Object doInBackground(Object... urls)
+		{
+			 // params comes from the execute() call: params[0] is the url.
+            try 
+            {
+                return downloadUrl(urls[0]);
+            } 
+            catch (IOException e) 
+            {
+                return "Unable to retrieve web page. URL may be invalid.";
+            }
+		}
+    	
+    }
+}
+

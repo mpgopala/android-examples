@@ -1,0 +1,36 @@
+public class Test 
+{
+	public static int staticInt = 0;
+	public int memberInt;
+	
+	public static double square(double x)
+	{
+		return x*x;
+	}
+	
+	public String toString()
+	{
+		return ("staticInt = " + staticInt + ". memberInt = " + memberInt);
+	}
+	public static void main(String[] args)
+	{
+		Test t1 = new Test();
+		Test t2 = new Test();
+		
+		t1.memberInt = 1;
+		System.out.println("t1 = " + t1.toString());
+		t2.memberInt = 2;
+		System.out.println("t2 = " + t2.toString());
+		t1.staticInt = 3;
+		System.out.println("t1 = " + t1.toString());
+		System.out.println("t2 = " + t2.toString());
+		t2.staticInt = 4;
+		System.out.println("t1 = " + t1.toString());
+		System.out.println("t2 = " + t2.toString());
+		
+		System.out.println("staticInt = " + Test.staticInt);
+		
+		
+		t1.square(3.0);
+	}
+}

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>New File</title>
+<script type="text/javascript">
+function f()
+{
+	this.a = 0;
+	this.b = 0;
+}
+</script>
+</head>
+<body>
+
+</body>
+</html>

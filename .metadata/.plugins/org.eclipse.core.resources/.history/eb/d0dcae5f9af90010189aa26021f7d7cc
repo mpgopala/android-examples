@@ -1,0 +1,19 @@
+
+public class Test 
+{
+	public static int staticInt;
+	public int memberInt;
+	
+	public void show()
+	{
+		System.out.println("staticInt = " + staticInt + ". memberInt = " + memberInt);
+	}
+	public static void main(String[] args)
+	{
+		Test t1 = new Test();
+		Test t2 = new Test();
+		
+		t1.memberInt = 1;
+		t2.memberInt = 2;
+	}
+}
